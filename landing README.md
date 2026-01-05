@@ -15,18 +15,6 @@ What This Repository Demonstrates
 	•	Secure-by-default enablement for engineering teams
 Each project is self-contained, reproducible, and focused on a specific security problem.
 
-Repository Structure
-
-.
-├── policy/          # Policy-as-code (OPA / Rego)
-│   ├── baseline/    # CIS-inspired baseline guardrails
-│   └── custom/      # Organization-specific security policies
-├── infra/           # Terraform examples used for policy validation
-│   └── examples/
-├── scripts/         # Helper scripts for running policy checks
-├── docs/            # Design notes and documentation
-└── README.md
-
 Featured Project: Cloud Security Guardrails
 
 Location: policy/opa/
