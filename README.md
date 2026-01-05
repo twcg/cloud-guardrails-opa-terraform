@@ -1,54 +1,95 @@
-Preventative Cloud Security Guardrails (Terraform + OPA)
+Cloud Security Engineering Portfolio
+Overview
 
-Overview:
-This project implements preventative cloud security guardrails by evaluating Terraform execution plans against policy-as-code rules before any infrastructure is deployed to AWS.
-The goal is to block insecure or non-compliant infrastructure configurations (e.g., public storage, missing encryption) at deploy time, eliminating entire classes of cloud misconfiguration risk without slowing development teams.
+This repository contains hands-on cloud security engineering projects focused on building preventive, automated security controls for modern cloud environments.
 
-Problem Statement:
-Cloud security incidents are frequently caused by insecure infrastructure configurations, not application bugs. Examples include:
-Publicly accessible storage
-Over-permissive access controls
-Missing encryption
-Traditional security controls often detect these issues after deployment, increasing incident response effort, audit findings, and business risk.
+The work here demonstrates how security can be embedded directly into infrastructure and developer workflows using policy-as-code, automation, and secure-by-default architecture — rather than relying on manual reviews or post-deployment detection.
 
-Solution:
-This project enforces policy-as-code guardrails on Terraform plans using OPA (Open Policy Agent) and Conftest.
-By validating Terraform plans before terraform apply, insecure configurations are blocked before AWS resources are created.
-This approach:
-Prevents misconfigurations instead of detecting them later
-Requires no AWS credentials
-Integrates cleanly into CI/CD workflows
-Scales across teams and environments
+This portfolio is designed to reflect real-world practices used by Cloud Security, Platform Security, and DevSecOps teams.
 
-Where This Runs in the Lifecycle:
-This control runs before infrastructure exists.
+What This Repository Demonstrates
 
-Terraform code
-      ↓
-terraform plan
-      ↓
-OPA / Conftest policy evaluation  ← (this project)
-      ↓
-terraform apply (only if policies pass)
-      ↓
-AWS resources created
-This project does not monitor or control running workloads; it enforces security exclusively at infrastructure deployment time.
+Cloud security architecture and design judgment
 
-What Is Enforced (Current Scope)
+Policy-as-code using industry tooling (OPA / Terraform)
 
-The current implementation enforces secure S3 storage defaults:
+Preventive security controls evaluated before deployment
 
-❌ Blocks public S3 bucket ACLs
-❌ Blocks S3 buckets without public access blocks
-✅ Allows private, encrypted S3 buckets
+Separation of baseline security standards and organization-specific policies
 
-The pattern is intentionally generic and extensible to other controls (IAM, networking, encryption, etc.).
+Secure-by-default enablement for engineering teams
 
-Bad vs Good Examples
+Each project is self-contained, reproducible, and focused on a specific security problem.
 
-This repository includes intentionally insecure and secure Terraform examples to demonstrate how the guardrails behave in both failure and success scenarios.
+Repository Structure
+.
+├── policy/          # Policy-as-code (OPA / Rego)
+│   ├── baseline/    # CIS-inspired baseline guardrails
+│   └── custom/      # Organization-specific security policies
+├── infra/           # Terraform examples used for policy validation
+│   └── examples/
+├── scripts/         # Helper scripts for running policy checks
+├── docs/            # Design notes and documentation
+└── README.md
 
-bad_s3: Defines a publicly accessible S3 bucket and is blocked by policy.
-good_s3: Defines a private, encrypted S3 bucket and passes policy checks.
+Featured Project: Cloud Security Guardrails
 
-This pattern shows how insecure infrastructure is prevented from deployment while compliant configurations proceed without friction.
+Location: policy/opa/
+
+This project implements preventive cloud security guardrails that evaluate Terraform plans before infrastructure is deployed.
+
+Highlights:
+
+CIS-inspired baseline controls (storage, encryption, network exposure)
+
+Custom, risk-based security policies layered on top
+
+Insecure infrastructure is blocked; secure infrastructure passes
+
+Fully reproducible via a single script
+
+➡️ See the detailed README in policy/opa/ for full implementation details.
+
+How These Projects Are Intended to Be Used
+
+In a real environment, these controls would run:
+
+In CI/CD pipelines
+
+On pull requests
+
+Before terraform apply
+
+This approach allows organizations to:
+
+Enforce security automatically
+
+Reduce operational toil
+
+Scale security without slowing development
+
+Why This Portfolio Exists
+
+This repository focuses on how security is built and enforced, not just on tools or certifications.
+
+The intent is to demonstrate:
+
+Practical cloud security engineering
+
+Automation-first thinking
+
+Architecture decisions aligned with real business constraints
+
+Getting Started
+
+Each project includes its own README with:
+
+Design intent
+
+How to run it locally
+
+What security problem it solves
+
+Start with:
+
+policy/opa/
