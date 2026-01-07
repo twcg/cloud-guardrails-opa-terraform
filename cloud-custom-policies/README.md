@@ -23,23 +23,17 @@ Custom policies exist to **translate these requirements into automated, preventi
 
 ## How These Policies Are Enforced
 
-Custom policies are evaluated **alongside baseline policies** during Terraform plan validation:
+### Policy Enforcement Flow
 
-Terraform code
-|
-v
-terraform plan
-|
-v
-OPA / Conftest evaluation
-|-- CIS-inspired baseline policies
-|-- Custom organization policies (this directory)
-|
-v
-terraform apply (only if all policies pass)
+1. Developers write Terraform code
+2. Terraform generates an execution plan (`terraform plan`)
+3. The plan is evaluated by OPA / Conftest
+   - CIS-inspired baseline policies are applied
+   - Custom organization policies are applied
+4. Terraform apply is only allowed if all policies pass
+5. AWS resources are created
 
 Infrastructure is only deployed when **both baseline and custom policies pass**.
-
 ---
 
 ## Current Scope
