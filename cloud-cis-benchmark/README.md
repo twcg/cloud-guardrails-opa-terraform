@@ -37,18 +37,28 @@ Policies are written to be clear, auditable, and extensible.
 
 Project Structure
 
-.
-├── infra/
-│   └── examples/
-│       ├── bad_s3/     # Intentionally insecure Terraform example
-│       └── good_s3/    # Secure Terraform example
-├── policy/
-│   └── opa/
-│       ├── baseline/   # CIS-inspired baseline guardrails
-│       └── s3.rego     # Custom policies
-├── scripts/
-│   └── test-policies.sh
-└── README.md
+### Project Structure
+
+- **infra/**
+  - **examples/**
+    - **bad_s3/**  
+      Intentionally insecure Terraform example
+    - **good_s3/**  
+      Secure Terraform example
+
+- **policy/**
+  - **opa/**
+    - **baseline/**  
+      CIS-inspired baseline guardrails
+    - **s3.rego**  
+      Custom organization-specific policies
+
+- **scripts/**
+  - **test-policies.sh**  
+    Helper script to run policy evaluation locally
+
+- **README.md**  
+  Project documentation
 
 Proof the Guardrail Works
 
