@@ -24,14 +24,18 @@ Custom policies exist to **translate these requirements into automated, preventi
 ## How These Policies Are Enforced
 
 Custom policies are evaluated **alongside baseline policies** during Terraform plan validation:
+
 Terraform code
-↓
+|
+v
 terraform plan
-↓
+|
+v
 OPA / Conftest evaluation
-├─ CIS-inspired baseline policies
-└─ Custom organization policies (this directory)
-↓
+|-- CIS-inspired baseline policies
+|-- Custom organization policies (this directory)
+|
+v
 terraform apply (only if all policies pass)
 
 Infrastructure is only deployed when **both baseline and custom policies pass**.
